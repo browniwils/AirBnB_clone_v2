@@ -12,17 +12,16 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         new_dict = {}
         if cls:
-            for key in self.__objects:
-                part = key.replace(".", " ")
-                if cls.__name__ in part:
+            for key, val in self.__objects.items():
+                if cls.__name__ == val.__class__.__name__:
                     new_dict[key] = self.__objects[key]
-                return new_dict
+            return new_dict
         else:
             return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        self.all()[obj.to_dict()['__class__'] + '.' + obj.id] = obj
 
     def save(self):
         """Saves storage dictionary to file"""
