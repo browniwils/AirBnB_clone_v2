@@ -8,10 +8,10 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class State(BaseModel):
+class State(BaseModel, Base):
     """ State class """
     if storage_engine == "db":
-        __table__ = "states"
+        __tablename__ = "states"
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
     else:
