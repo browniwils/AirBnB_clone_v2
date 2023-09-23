@@ -23,7 +23,9 @@ class State(BaseModel, Base):
     if storage_engine != "db":
         @property
         def cities(self):
-            """Get list of cities in relation with state"""
+            """
+            Get list of cities in relation with state
+            """
             state_cities = []
             cities = storage.all(City)
             for city in cities.values():
